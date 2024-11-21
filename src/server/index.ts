@@ -1,7 +1,9 @@
 import express from 'express';
 import taskRoutes from './routes/task.routes'
 import bodyParser from 'body-parser';
-import exp from 'constants';
+import { handleResponse } from '../handlers/response.handler';
+import { handleError } from '../handlers/error.handler';
+
 const app = express();
 
 //middlewares
@@ -14,5 +16,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1', taskRoutes)
+
+app.use(handleResponse)
+app.use(handleError)
 
 export default app;
